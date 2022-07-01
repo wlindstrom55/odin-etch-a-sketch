@@ -1,32 +1,32 @@
-let mode = "picker";
-let mouseDown = false;
+let mode = "picker"; //picker by default
+let mouseDown = false; 
 let selectedButton = document.querySelector('#picker');
 
 document.body.onmouseup = () => (mouseDown = false);
-document.body.onmousedown = () => (MouseDown = true);
+document.body.onmousedown = () => (mouseDown = true);
 
 const mainDiv = document.querySelector('.main');
 const colorPicker = document.querySelector('#color');
 const slider = document.querySelector('#sizeSlider');
 const sliderText = document.querySelector('#sizeText');
 
-function generateGrid(size) {
+function createGrid(size) {
     const canvas = document.createElement('div');
-    canvas.setAttribute('id', 'canvas'); //sets id to canvas
-    mainDiv.append(canvas); //add canvas to main div
-    for (let i = 0; i < size; i++) {
-        console.log('test'); //should print as many times as size
-        const pixel = document.createElement('div');
-        pixel.classList.add('pixel'); //add pixel class to each pixel
-        canvas.append(pixel); //add pixel to canvas
+    canvas.classList.add('canvas');
+    canvas.style.backgroundColor = 'lightgrey'; 
+    mainDiv.append(canvas); 
+    for (let i = 0; i < size * size; i++) {
+            const pixel = document.createElement('div');
+            pixel.classList.add('pixel');
+            canvas.append(pixel); 
     }
-    //these style manips essentially set the grid to wrap
+    //these style manips set the size of the grid evenly by size var
     canvas.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
     canvas.style.gridTemplateRows = `repeat(${size}, 1fr)`;
 }
 
 function removeCanvas() {
-    const canvas = document.querySelector('#canvas');
+    const canvas = document.querySelector('.canvas');
     canvas.remove();
 }
 
@@ -34,7 +34,7 @@ function makeCanvas() {
     if (size > 100) return; //if size > 100 then stop.
     if (isNaN(size)) return; //if size is null, then stop.
     removeCanvas(); //clear canvas before starting anew
-    generateGrid(size);
+    createGrid(size);
     getPixels();
 }
 
@@ -42,7 +42,7 @@ function getPixels() { //adds event listeners to pixels here
     pixels = document.querySelectorAll('.pixel'); //select all pixel class
 
     pixels.forEach((pixel) => { //for each pixel, add the following event listeners
-        pixel.addEventListener("mouseover", changePixel); //mouseover = hange color
+        pixel.addEventListener("mouseover", changePixel); 
         pixel.addEventListener("mousedown", changePixel);
         pixel.addEventListener("click", changePixel);
     });
@@ -59,7 +59,7 @@ function getColor() {
       } else if (mode === "random") { //otherwise random
         return randomRGB();
       } else if (mode === "eraser") {//otherwise 'erase' (set to white)
-        return "white";
+        return "lightgrey";
       }
 }
 
@@ -72,7 +72,7 @@ function randomRGB() {
   }
   
   function changeMode(btn) {
-    selectedButton.classList.toggle("selected");
+    selectedButton.classList.toggle("selected"); //changes selected button to selected class
     mode = `${btn.id}`;
     console.log(mode);
     selectedButton = btn;
@@ -82,13 +82,13 @@ function randomRGB() {
   // Slider
   let size = slider.value;
   
-  sliderText.innerHTML = `${size} x ${size}`;
+  sliderText.innerHTML = `Size: ${size} x ${size}`;
   
   slider.oninput = function () { //on sizeSlider input change, run anon function 
-    sliderText.innerHTML = `${this.value} x ${this.value}`; //changes text to approp vals
+    sliderText.innerHTML = `Size: ${this.value} x ${this.value}`; //changes text to approp vals
     size = this.value; //set size = new slider value
     makeCanvas(); //clear canvas, create new one
   };
   
-  generateGrid(16); //create the grid
+  createGrid(16);
   getPixels(); //set event listeners to pixels

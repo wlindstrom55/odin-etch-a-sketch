@@ -2,35 +2,38 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
         <title>Document</title>
         <link rel="stylesheet" href="styles.css">
-        <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Marck+Script&display=swap" rel="stylesheet">
     </head>
 
     <body class="bod">
         <header class="header">
-            <h1 id="title">Etch A Sketch</h1>
+            <h1 id="title">Etch-A-Sketch</h1>
         </header>
-        <div class="main">
-            <div class="modes">
-                <div class = "buttons">
-                    <div class="color">
-                        <input type="color" name="color" id="color">
-                    </div>
-                    <button onclick="changeMode(this)" id="picker" class="selected">Color</button>
-                    <button onclick="changeMode(this)" id="random">Random RGB</button>
-                    <button onclick="changeMode(this)" id="eraser">Eraser</button>
-                    <button onclick="makeCanvas()" id="random">Clear</button>
-
-                    <div class="size">
-                        <p id="sizeText"></p>
-                        <input type="range" name="range" id="sizeSlider" min="1" max="100" value="16">
-                    </div>
+        <div class="main"></div>
+        <div class="modes">
+            <div class = "buttons">
+                <div class="color">
+                    <input type="color" name="color" id="color">
+                </div>
+                <button onclick="changeMode(this)" id="picker" class="selected">Color</button>
+                <button onclick="changeMode(this)" id="eraser">Eraser</button>
+                <button onclick="changeMode(this)" id="random">Random RGB</button>
+                <button onclick="makeCanvas()" id="random">Clear</button>
+                <div class="size">
+                    <p id="sizeText"></p>
+                    <input type="range" name="range" id="sizeSlider" min="1" max="100" value="16">
                 </div>
             </div>
         </div>
+        <footer class="footer">
+            <div class="knob"></div>
+            <div class="knob"></div>
+        </footer>
         <script src="eas.js" defer></script>
     </body>
 </html>
